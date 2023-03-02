@@ -2,13 +2,13 @@
 # $< = first dependency
 # $^ = all dependencies
 
-C_SOURCES = $(wildcard *.c)
-HEADERS = $(wildcard *.h)
-OBJ_FILES = ${C_SOURCES:.c=.o}
+C_SOURCES = $(wildcard *.cpp */*.cpp)
+HEADERS = $(wildcard *.h */*.h)
+OBJ_FILES = ${C_SOURCES:.cpp=.o cpu/interrupt.o}
 
 all: run
 
-kernel.bin: boot/kernel_entry.o kernel.o #${OBJ_FILES}
+kernel.bin: boot/kernel_entry.o kernel.o ${OBJ_FILES}
 	ld -m elf_i386 -o $@ -Ttext 0x1000 $^ --oformat binary
 
 os_image.bin: boot/MBR.bin kernel.bin
@@ -21,7 +21,7 @@ run: os_image.bin
 %.bin: %.asm
 	nasm $< -f bin -o $@ 
 
-%.o: %.cpp #${HEADERS}
+%.o: %.cpp ${HEADERS}
 	gcc -m32 -ffreestanding -fno-pie -c $< -o $@
 
 %.o: %.asm

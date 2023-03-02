@@ -3,9 +3,7 @@ HEADER FILE FOR VGA DISPLAY DRIVER USED TO DISPLAY KERNEL
 */
 #pragma once
 #include <stdint.h>
-#ifndef DISPLAY_H
-#define DISPLAY_H
-
+#include "../helpers.h"
 #define VIDEO_ADDRESS 0xB8000 // VGA BUS ADDRESS
 #define MAX_ROWS 25 // Maximum size of printable rows
 #define MAX_COLS 80 // Maximum size of printable cols
@@ -18,47 +16,6 @@ HEADER FILE FOR VGA DISPLAY DRIVER USED TO DISPLAY KERNEL
 class Display
 {
     private:
-            /**
-         * Read a byte from the specified port
-         */
-        unsigned char port_byte_in(uint16_t port)
-        {
-            /* Inline assembler syntax
-            * !! Notice how the source and destination registers are switched from NASM !!
-            *
-            * '"=a" (result)'; set '=' the C variable '(result)' to the value of register e'a'x
-            * '"d" (port)': map the C variable '(port)' into e'd'x register
-            *
-            * Inputs and outputs are separated by colons
-            */
-            unsigned char result;
-            __asm__("in %%dx, %%al": "=a"(result): "d"(port));
-            return result;
-        }
-        /**
-         * Write a byte from the specified port
-         */
-        void port_byte_out(uint16_t port, uint8_t data)
-        {
-            __asm__("out %%al, %%dx": : "a" (data), "d"(port));
-        }
-
-        /**
-         * Read a word from the specified port
-         */
-        unsigned short port_word_in(uint16_t port)
-        {
-            unsigned short result;
-            __asm__("in %%dx, %%ax" : "=a" (result) : "d" (port));
-            return result;
-        }
-        /**
-         * Write a word from the specified port
-         */
-        void port_word_out(uint16_t port, uint16_t data)
-        {
-            asm("out %%ax, %%dx" : : "a" (data), "d" (port));
-        }
         /* Get the location of the cursor*/
         int get_cursor() 
         {
@@ -138,12 +95,8 @@ class Display
         }
 
     public:
-        void print_screen(char *string);
+        void print_screen(const char *print_string);
         void print_newline();
         void clear_screen();
         void print_backspace();
 };
-
-
-
-#endif

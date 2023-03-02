@@ -1,16 +1,16 @@
 #include "display.h"
 
-void Display::print_screen(char *string) {
+void Display::print_screen(const char* print_string) {
     int offset = get_cursor();
     int i = 0;
-    while (string[i] != 0) {
+    while (print_string[i] != 0) {
         if (offset >= MAX_ROWS * MAX_COLS * 2) {
             offset = scroll_ln(offset);
         }
-        if (string[i] == '\n') {
+        if (print_string[i] == '\n') {
             offset = move_offset_to_new_line(offset);
         } else {
-            set_char_at_video_memory(string[i], offset);
+            set_char_at_video_memory(print_string[i], offset);
             offset += 2;
         }
         i++;
