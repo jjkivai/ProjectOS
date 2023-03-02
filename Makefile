@@ -21,7 +21,7 @@ run: os_image.bin
 %.bin: %.asm
 	nasm $< -f bin -o $@ 
 
-%.o: %.c #${HEADERS}
+%.o: %.cpp #${HEADERS}
 	gcc -m32 -ffreestanding -fno-pie -c $< -o $@
 
 %.o: %.asm
