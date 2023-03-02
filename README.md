@@ -6,10 +6,23 @@ The developers for this code are:
 - Tejas Kulkarni
 - Waqar Ahmed
 
-The directories included each define a fundamental part of a working OS
+## Project Structure:
 
-The `boot` folder contains boot sectors, as well as the disk loader.
+-The `boot` folder contains boot sectors, as well as the disk loader.
 
-The `drivers` define simple drivers that are necessary for the basic operation of a OS
+-The `drivers` define simple drivers that are necessary for the basic operation of a OS
 
-The `cpu` contains functions needed for CPU processes such as interrupts, and timers.
+-The `cpu` contains functions needed for CPU processes such as interrupts, and timers.
+
+## Usage
+
+To build the OS image, simply run:
+
+    make
+
+
+## Requirements
+- nasm
+- ld
+- gcc
+- qemu
