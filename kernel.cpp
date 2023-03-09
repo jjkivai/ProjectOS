@@ -12,7 +12,7 @@ void main()
     // Initialize Display drivers
     Display display = Display();
     display.clear_screen(); // Can be called by default
-    display.print_screen("Welcome to Dig Bick OS\n");
+    display.print_screen("Welcome to The OS\n");
 
     // Initialize Interrupt Service
     ISR isr = ISR(display);
