@@ -2,13 +2,13 @@
 # $< = first dependency
 # $^ = all dependencies
 
-C_SOURCES = $(wildcard *.cpp */*.cpp)
-HEADERS = $(wildcard *.h */*.h)
+C_SOURCES = $(wildcard */*.cpp *.cpp )
+HEADERS = $(wildcard */*.h *.h )
 OBJ_FILES = ${C_SOURCES:.cpp=.o cpu/interrupt.o}
 
 all: run
 
-kernel.bin: boot/kernel_entry.o kernel.o ${OBJ_FILES}
+kernel.bin: boot/kernel_entry.o ${OBJ_FILES}
 	ld -m elf_i386 -o $@ -Ttext 0x1000 $^ --oformat binary
 
 os_image.bin: boot/MBR.bin kernel.bin
