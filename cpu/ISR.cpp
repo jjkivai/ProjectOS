@@ -195,9 +195,11 @@ void ISR::__interrupt_request_handler(InterruptRegister *reg) {
     }
     port_byte_out(0x20, 0x20); /* leader */
 }
-
-
-
-// Linking the interrupt handlers to the assembly functions without creating ISR instance
-
-
+/* FUnction to enable interrupts*/
+void ISR::enable_interrupts() {
+    __asm__ volatile("sti");
+}
+/* Function to disable interrupts*/
+void ISR::disable_interrupts() {
+    __asm__ volatile("cli");
+}
