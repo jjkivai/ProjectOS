@@ -19,8 +19,8 @@ void IDT::load_idt()
 {
     Reg.base = (uint32_t) &Table;
     Reg.limit = ENTRIES * sizeof(Entry) - 1;
-    /* Don't make the mistake of loading &idt -- always load &reg */
-    __asm__ volatile("lidt (%0)" : : "r" (&Reg));
+    /* Don't make the mistake of loading &Table -- always load &reg */
+    __asm__ __volatile__("lidtl (%0)" : : "r" (&Reg));
 }
 /* Set IDT entry using pointers instead*/
 void IDT::set_entry2(Entry* entry, uint32_t handler, uint8_t types) 

@@ -73,8 +73,7 @@ extern "C" void irq15();
 #define IRQ13 45
 #define IRQ14 46
 #define IRQ15 47
-/* Exception Messages defined by x86 processors*/
-extern const char* Exception_Messages[];
+
 
 struct __attribute__((packed)) InterruptRegister {
     uint32_t ds; // Data segment selector
@@ -87,7 +86,7 @@ extern "C" void interrupt_request_handler(InterruptRegister *reg);
 
 class ISR {
     private:
-        IDT Idt;
+        IDT Idt = IDT();
         Display &disp;
         /* It matches how 'pusha' would push data to stack */
 
@@ -97,7 +96,7 @@ class ISR {
 
     public:
         ISR(Display& display) : disp(display) {
-            Idt = IDT();
+            // Idt = IDT();
         }
         void install_isr(); // Install ISR onto OS
         void __interrupt_handler(InterruptRegister *reg); // Handle ISR
@@ -107,6 +106,7 @@ class ISR {
         /* Functions to quickly enable or disable interrupts*/
         void enable_interrupts();
         void disable_interrupts();
+
         
 
 };

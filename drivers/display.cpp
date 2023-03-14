@@ -1,9 +1,9 @@
 #include "display.h"
 
-void Display::print_screen(const char* print_string) {
+void Display::print_screen(const char *print_string) {
     int offset = get_cursor();
     int i = 0;
-    while (print_string[i] != 0) {
+    while (print_string[i] != '\0') {
         if (offset >= MAX_ROWS * MAX_COLS * 2) {
             offset = scroll_ln(offset);
         }

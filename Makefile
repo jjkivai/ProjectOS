@@ -15,14 +15,18 @@ os_image.bin: boot/MBR.bin kernel.bin
 	cat $^ > $@
 
 run: os_image.bin 
-	qemu-system-i386 -drive format=raw,file=$<,index=0,if=floppy
+	qemu-system-x86_64 -drive format=raw,file=$<,index=0,if=floppy
 
 
 %.bin: %.asm
 	nasm $< -f bin -o $@ 
 
 %.o: %.cpp ${HEADERS}
-	gcc -m32 -ffreestanding -fno-pie -c $< -o $@
+	g++ -m32 -ffreestanding -fno-pie -c $< -o $@ -lstdc++ 
 
 %.o: %.asm
 	nasm $< -f elf -o $@
+
+clean:
+	rm -rf *.bin *.dis *.o os-image.bin *.elf
+	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o cpu/*.o

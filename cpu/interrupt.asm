@@ -1,9 +1,10 @@
 ; C fucntion to handle the interrupt request
-; [extern interrupt_handler]
-; [extern interrupt_request_handler]
+[extern interrupt_handler]
+[extern interrupt_request_handler]
 
 ; Common Interrupt Service Routine
 isr_common:
+    cli ; Disable interrupts
     ; Save the registers
     pusha
     mov ax, ds ; Save the data segment
@@ -16,11 +17,12 @@ isr_common:
 
     ; Call the interrupt handler
     push esp ; Push the stack pointer
-    ;call interrupt_handler
+    call interrupt_handler
     pop eax ; Pop the stack pointer
 
     ; Restore the registers
     pop eax
+    mov eax, 1
     mov ds, ax
     mov es, ax
     mov fs, ax
@@ -29,6 +31,14 @@ isr_common:
 
     ;Clean the pushed error code
     add esp, 8
+
+    ; Send the EOI
+    mov al, 0x20
+    out 0x20, al
+
+    sti ; Enable interrupts
+
+
     iret ; Pops CS, EIP, EFLAGS, SS, ESP
 
 ; Interrupt Service Routine for IRQ0
@@ -45,7 +55,7 @@ irq_common:
 
     ; Call the interrupt handler
     push esp ; Push the stack pointer
-    ;call interrupt_request_handler
+    call interrupt_request_handler
     pop ebx ; Pop the stack pointer
 
     ; Restore the registers
