@@ -4,7 +4,20 @@
         "string": "cpp",
         "atomic": "cpp",
         "cstdint": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "cstring": "cpp",
+        "chrono": "cpp",
+        "forward_list": "cpp",
+        "netfwd": "cpp",
+        "timer": "cpp",
+        "iosfwd": "cpp",
+        "ratio": "cpp",
+        "stdexcept": "cpp",
+        "thread": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "executor": "cpp",
+        "vector": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
