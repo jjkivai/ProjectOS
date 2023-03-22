@@ -57,22 +57,22 @@ extern "C" void irq15();
 
 
 /* Interrupt requests for hardware exceptions*/
-#define IRQ0 32
-#define IRQ1 33
-#define IRQ2 34
-#define IRQ3 35
-#define IRQ4 36
-#define IRQ5 37
-#define IRQ6 38
-#define IRQ7 39
-#define IRQ8 40
-#define IRQ9 41
-#define IRQ10 42
-#define IRQ11 43
-#define IRQ12 44
-#define IRQ13 45
-#define IRQ14 46
-#define IRQ15 47
+#define IRQ0 32 // Timer
+#define IRQ1 33 // Keyboard
+#define IRQ2 34 // Cascade
+#define IRQ3 35 // COM2
+#define IRQ4 36 // COM1
+#define IRQ5 37 // LPT2
+#define IRQ6 38 // Floppy
+#define IRQ7 39 // LPT1
+#define IRQ8 40 // CMOS
+#define IRQ9 41 // Free
+#define IRQ10 42 // Free
+#define IRQ11 43 // Free
+#define IRQ12 44 // PS2 Mouse
+#define IRQ13 45 // FPU
+#define IRQ14 46 // Primary ATA
+#define IRQ15 47 // Secondary ATA
 
 
 struct __attribute__((packed)) InterruptRegister {
@@ -90,11 +90,11 @@ class ISR {
         Display &disp;
         /* It matches how 'pusha' would push data to stack */
 
+
+    public:
         typedef void (*InterruptHandler)(InterruptRegister *reg); //Defining type of interrupt handler
         
         InterruptHandler handlers[ENTRIES];
-
-    public:
         ISR(Display& display) : disp(display) {
             // Idt = IDT();
         }

@@ -1,4 +1,4 @@
-# Master Boot Record
+; Master Boot Record
 ; This is where the kernel will go to when OS starts
 [BITS 16] ; Operate in 16 biy
 [ORG 0x7C00] ;specifies the location in memory where the code should be loaded and executed

@@ -9,6 +9,8 @@ void Display::print_screen(const char *print_string) {
         }
         if (print_string[i] == '\n') {
             offset = move_offset_to_new_line(offset);
+        } else if (print_string[i] == '\t') {
+            offset += 8;
         } else {
             set_char_at_video_memory(print_string[i], offset);
             offset += 2;

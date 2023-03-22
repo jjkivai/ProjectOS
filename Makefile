@@ -22,7 +22,7 @@ run: os_image.bin
 	nasm $< -f bin -o $@ 
 
 %.o: %.cpp ${HEADERS}
-	g++ -m32 -ffreestanding -fno-pie -c $< -o $@ -lstdc++ 
+	g++ -m32 -ffreestanding -fno-pie -c $< -o $@ -fconcepts -std=c++2a
 
 %.o: %.asm
 	nasm $< -f elf -o $@

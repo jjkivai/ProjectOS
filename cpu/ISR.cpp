@@ -172,7 +172,7 @@ void ISR::__interrupt_handler(InterruptRegister *reg) {
     };
 
 
-
+    /* Print the interrupt number and the message*/
     disp.print_screen("Recieved interrupt: ");
     char s[3];
     int_to_string(reg->int_no, s);
@@ -182,14 +182,7 @@ void ISR::__interrupt_handler(InterruptRegister *reg) {
     disp.print_newline();
     disp.print_newline();
 
-    disp.print_screen("EAX: ");
-    int_to_string(reg->eax, s);
-    disp.print_screen(s);
-    disp.print_newline();
-    disp.print_screen("EdX: ");
-    int_to_string(reg->edx, s);
-    disp.print_screen(s);
-    disp.print_newline();
+
 
 }
 

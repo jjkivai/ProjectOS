@@ -24,3 +24,11 @@ int string_length(char s[]);
 void reverse(char s[]);
 /* Convert integer to string, and store in str*/
 void int_to_string(int n, char str[]);
+/* Backspace */
+bool backspace(char s[]);
+/* append strings*/
+void append(char s[], char n);
+/* Compare strings */
+int compare_strings(char s1[], char s2[]);
+/* Starts with*/
+bool starts_with(char s1[], char s2[]);

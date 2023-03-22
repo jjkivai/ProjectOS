@@ -30,13 +30,14 @@ isr_common:
     popa
 
     ;Clean the pushed error code
-    add esp, 8
+    add esp, 0x08
+
 
     ; Send the EOI
     mov al, 0x20
     out 0x20, al
 
-    sti ; Enable interrupts
+    ;sti ; Enable interrupts
 
 
     iret ; Pops CS, EIP, EFLAGS, SS, ESP
