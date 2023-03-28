@@ -96,6 +96,7 @@ class Display
 
     public:
         void print_screen(const char *print_string);
+        void print_screen(uint32_t number);
         void print_newline();
         void clear_screen();
         void print_backspace();

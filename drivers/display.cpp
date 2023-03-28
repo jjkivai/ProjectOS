@@ -19,6 +19,12 @@ void Display::print_screen(const char *print_string) {
     }
     set_cursor(offset);
 }
+void Display::print_screen(uint32_t number)
+{
+    char buffer[256];
+    int_to_string(number, buffer);
+    print_screen(buffer);
+}
 void Display::clear_screen()
 {
     for (int i = 0; i < MAX_COLS * MAX_ROWS; ++i)
